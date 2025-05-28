@@ -88,6 +88,10 @@ GEM
     debug (1.10.0)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    dotenv (3.1.8)
+    dotenv-rails (3.1.8)
+      dotenv (= 3.1.8)
+      railties (>= 6.1)
     drb (2.2.3)
     erb (5.0.1)
     erubi (1.13.1)
@@ -101,6 +105,8 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.12.2)
+    jwt (2.10.1)
+      base64
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
@@ -142,6 +148,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.8-x86_64-linux-musl)
       racc (~> 1.4)
+    openssl (3.3.0)
     parallel (1.27.0)
     parser (3.3.8.0)
       ast (~> 2.4.1)
@@ -158,6 +165,9 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.15)
+    rack-cors (3.0.0)
+      logger
+      rack (>= 3.0.14)
     rack-session (2.1.1)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -262,8 +272,12 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
+  dotenv-rails
+  jwt
+  openssl
   pg (~> 1.1)
   puma (>= 5.0)
+  rack-cors
   rails (~> 7.2.2, >= 7.2.2.1)
   rubocop-rails-omakase
   tzinfo-data
