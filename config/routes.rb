@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
-      post '/issue_license', to: 'licenses#create'
+      resources :licenses, only: [:create]
     end
   end
 end
