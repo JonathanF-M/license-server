@@ -12,7 +12,7 @@ class Api::V1::LicensesController < ApplicationController
     private_key = OpenSSL::PKey::RSA.new(File.read(ENV["PRIVATE_KEY_PATH"]))
     token = JWT.encode(payload, private_key, 'RS256')
 
-    epub_path = params[:epub_file]&.path || "public/test.epub"
+    epub_path = find_epub_file(params[:asset_id])
     encrypted_epub = encrypt_epub(epub_path, encryption_key)
 
     render json: {
@@ -31,5 +31,13 @@ class Api::V1::LicensesController < ApplicationController
     encrypted = cipher.update(epub_content) + cipher.final
     
     iv + encrypted
+  end
+
+  def find_epub_file(asset_id)
+    epub_dir = Rails.root.join('storage', 'epubs')
+    file_path = epub_dir.join("#{asset_id}.epub")
+
+    raise "Book not found" unless File.exist?(file_path)
+    file_path
   end
 end
